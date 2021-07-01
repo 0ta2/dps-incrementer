@@ -7,23 +7,26 @@ export async function main(denops: Denops): Promise<void> {
     async increment(): Promise<void> {
       const word = await cword(denops);
 
-      const num = Number(word) + 1;
-
-      await denops.cmd(`let @a = "${num}"`);
-      await denops.cmd('normal "_diw');
-      await denops.cmd('normal "aP');
-
-      console.log(num);
+      let num = Number(word);
+      if (typeof num === "number") {
+        ++num;
+        await denops.cmd(`let @a = "${num}"`);
+        await denops.cmd('normal "_diw');
+        await denops.cmd('normal "aP');
+      }
     },
 
     async decrement(): Promise<void> {
       const word = await cword(denops);
 
-      const num = Number(word) - 1;
+      let num = Number(word);
 
-      await denops.cmd(`let @a = "${num}"`);
-      await denops.cmd('normal "_diw');
-      await denops.cmd('normal "aP');
+      if (typeof num === "number") {
+        --num;
+        await denops.cmd(`let @a = "${num}"`);
+        await denops.cmd('normal "_diw');
+        await denops.cmd('normal "aP');
+      }
 
       console.log(num);
     },
