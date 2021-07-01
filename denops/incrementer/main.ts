@@ -1,12 +1,13 @@
 import type { Denops } from "./deps.ts";
 import { execute } from "./deps.ts";
+import { cword } from "./cword.ts";
 
 export async function main(denops: Denops): Promise<void> {
   denops.dispatcher = {
     async increment(): Promise<void> {
-      const cword = await denops.call("expand", "<cword>") as number;
+      const word = await cword(denops);
 
-      const num = Number(cword) + 1;
+      const num = Number(word) + 1;
 
       await denops.cmd(`let @a = "${num}"`);
       await denops.cmd('normal "_diw');
@@ -16,9 +17,9 @@ export async function main(denops: Denops): Promise<void> {
     },
 
     async decrement(): Promise<void> {
-      const cword = await denops.call("expand", "<cword>") as number;
+      const word = await cword(denops);
 
-      const num = Number(cword) - 1;
+      const num = Number(word) - 1;
 
       await denops.cmd(`let @a = "${num}"`);
       await denops.cmd('normal "_diw');
