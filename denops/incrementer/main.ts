@@ -35,7 +35,7 @@ export async function main(denops: Denops): Promise<void> {
   await execute(
     denops,
     `
-    command! Incrementer echomsg denops#request('${denops.name}', 'increment', []),
+    command! Incrementer echomsg denops#request('${denops.name}', 'increment', [])
     command! Decrement echomsg denops#request('${denops.name}', 'decrement', [])
     `,
   );
