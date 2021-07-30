@@ -16,14 +16,6 @@ export async function write(denops: Denops, word: number | string | null) {
   const col = await fn.col(denops, ".") as number;
   const line = await fn.getline(denops, ".");
 
-  //if (typeof line[col] === "string") {
-  //  await denops.cmd('normal "aP');
-  //  console.log("aP");
-  //} else {
-  //  await denops.cmd('normal "ap');
-  //  console.log("ap");
-  //}
-
   if (
     (typeof line[col - 1] === "string" && !(line[col - 1] === " ")) &&
     !(curColBool)
