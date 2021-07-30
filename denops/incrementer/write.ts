@@ -5,16 +5,24 @@ export async function write(denops: Denops, word: number | string | null) {
   // Save the current register to a variable.
   const regSave = await fn.getreg(denops, "a");
 
+  const curCol = await fn.col(denops, ".") as number;
+  const endLine = await fn.col(denops, "$") as number;
+
+  const curColBool = (curCol === endLine - 1) ? true : false;
+
   await fn.setreg(denops, "a", word);
   await denops.cmd('normal "_diw');
 
   const col = await fn.col(denops, ".") as number;
   const line = await fn.getline(denops, ".");
 
-  if (line[col - 1] === " ") {
-    await denops.cmd('normal "ap');
-  } else {
+  if (
+    (typeof line[col - 1] === "string" && !(line[col - 1] === " ")) &&
+    !(curColBool)
+  ) {
     await denops.cmd('normal "aP');
+  } else {
+    await denops.cmd('normal "ap');
   }
 
   // Return the evacuated register.
