@@ -28,8 +28,6 @@ export async function main(denops: Denops): Promise<void> {
     },
   };
 
-  // 16/15(日)
-  //
   await execute(
     denops,
     `
