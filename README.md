@@ -5,6 +5,7 @@ Increments or decrements a number, day of the week, etc.
 # Install
 
 Please install [deno](https://deno.land/)
+
 Next, install the plug-in.
 
 packer.nvim
